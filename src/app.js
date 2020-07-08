@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Layout } from 'antd';
-import './app.css';
-import { getData } from "./api";
+import React from 'react'
+import { Layout, ConfigProvider } from 'antd'
+import { BrowserRouter } from 'react-router-dom'
+import ruRU from 'antd/lib/locale-provider/ru_RU'
+
+import Internationalization from 'components/Internationalization'
+import LibraryProvider from 'store/library/LibraryProvider'
+import Routes from 'routes/Routes'
+
+import 'app.css'
+
 
 export default function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    getData().then(setData);
-  }, []);
-
   return (
-    <Layout>
-      <pre>
-        { JSON.stringify(data, null, 2) }
-      </pre>
-    </Layout>
-  );
+    <BrowserRouter>
+      <ConfigProvider locale={ruRU}>
+        <Internationalization>
+          <LibraryProvider>
+            <Layout className="app-layout">
+              <Routes />
+            </Layout>
+          </LibraryProvider>
+        </Internationalization>
+      </ConfigProvider>
+    </BrowserRouter>
+  )
 }

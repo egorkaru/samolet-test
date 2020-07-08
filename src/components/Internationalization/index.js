@@ -1,0 +1,3 @@
+import Internationalization from 'components/Internationalization/Internationalization'
+
+export default Internationalization
